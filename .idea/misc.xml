@@ -5,12 +5,14 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Gateway/pom.xml" />
-<<<<<<< HEAD
-      </list>
-    </option>
-=======
         <option value="$PROJECT_DIR$/Config/pom.xml" />
         <option value="$PROJECT_DIR$/Eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/Security/pom.xml" />
+        <option value="$PROJECT_DIR$/Order/pom.xml" />
+        <option value="$PROJECT_DIR$/Bill/pom.xml" />
+        <option value="$PROJECT_DIR$/Configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/Product-Category/pom.xml" />
+        <option value="$PROJECT_DIR$/User/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -18,7 +20,6 @@
         <option value="$PROJECT_DIR$/Config/pom.xml" />
       </set>
     </option>
->>>>>>> f2feb2c (Commit)
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
