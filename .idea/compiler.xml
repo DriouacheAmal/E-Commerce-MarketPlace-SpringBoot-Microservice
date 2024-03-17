@@ -6,19 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Order" />
+        <module name="User" />
         <module name="Configuration" />
-        <module name="Security" />
-        <module name="Eureka" />
         <module name="Gateway" />
+        <module name="Bill" />
+        <module name="Security" />
+        <module name="demo" />
+        <module name="Product-Category" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Configuration" options="-parameters" />
+      <module name="Bill" options="-parameters" />
+      <module name="Configuration" options="" />
       <module name="Eureka" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="Order" options="-parameters" />
+      <module name="Product-Category" options="-parameters" />
       <module name="Security" options="-parameters" />
+      <module name="User" options="-parameters" />
+      <module name="demo" options="-parameters" />
     </option>
   </component>
 </project>
