@@ -13,6 +13,8 @@
         <option value="$PROJECT_DIR$/Configuration/pom.xml" />
         <option value="$PROJECT_DIR$/Product-Category/pom.xml" />
         <option value="$PROJECT_DIR$/User/pom.xml" />
+        <option value="$PROJECT_DIR$/Catalogue/pom.xml" />
+        <option value="$PROJECT_DIR$/Payment/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
