@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -10,19 +11,26 @@
         <module name="User" />
         <module name="Configuration" />
         <module name="Gateway" />
-        <module name="Bill" />
+        <module name="Bill-Micro" />
+        <module name="Gateway (1)" />
         <module name="Security" />
         <module name="demo" />
         <module name="Product-Category" />
+        <module name="Eureka" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Catalogue" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Bill" options="-parameters" />
+      <module name="Bill-Micro" options="-parameters" />
+      <module name="Catalogue" options="-parameters" />
       <module name="Configuration" options="" />
       <module name="Eureka" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="Gateway (1)" options="-parameters" />
       <module name="Order" options="-parameters" />
       <module name="Product-Category" options="-parameters" />
       <module name="Security" options="-parameters" />

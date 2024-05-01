@@ -1,10 +1,8 @@
 spring:
     application:
         name: Gateway
-
 server:
     port: 8088
-
 eureka:
     client:
         serviceUrl:
