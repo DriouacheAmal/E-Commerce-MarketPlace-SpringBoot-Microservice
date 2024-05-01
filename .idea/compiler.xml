@@ -17,9 +17,11 @@
         <module name="demo" />
         <module name="Product-Category" />
         <module name="Eureka" />
+        <module name="Catalogue (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Bill" target="17" />
       <module name="Catalogue" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -27,11 +29,14 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Bill-Micro" options="-parameters" />
       <module name="Catalogue" options="-parameters" />
+      <module name="Catalogue (1)" options="-parameters" />
+      <module name="Catalogue (2)" options="-parameters" />
       <module name="Configuration" options="" />
       <module name="Eureka" options="-parameters" />
       <module name="Gateway" options="-parameters" />
       <module name="Gateway (1)" options="-parameters" />
       <module name="Order" options="-parameters" />
+      <module name="Payment" options="-parameters" />
       <module name="Product-Category" options="-parameters" />
       <module name="Security" options="-parameters" />
       <module name="User" options="-parameters" />
