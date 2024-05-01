@@ -15,21 +15,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/catalogues/api/products")
 public class ProductController {
     @Autowired
     private final ProductService productService;
 
 
-    @GetMapping("/{ProductId}")
-    public ResponseEntity<?> getProductById(@PathVariable Long ProductId) {
+    @GetMapping("/{productId}")
+    public ResponseEntity<?> getProductById(@PathVariable Long productId) {
         try{
-            ProductResponseDto productDto = productService.getProductById(ProductId);
+            ProductResponseDto productDto = productService.getProductById(productId);
             return ResponseEntity.ok(productDto);
         }catch(DataNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
 
         }
+    }
+
+    @GetMapping("/subcategory/{subCategory}")
+
+    public ResponseEntity<?> getProductsBySubCategoryId(Long subCategoryId){
+        try{
+            List<ProductResponseDto> productResponseDto = productService.getProductsBySubCategoryId(subCategoryId);
+            return ResponseEntity.ok(productResponseDto);
+        }catch (DataNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
     }
     @GetMapping("/")
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
@@ -48,10 +60,10 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/{ProductId}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long ProductId, @RequestBody ProductRequestDto productRequestDto) {
+    @PutMapping("/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long productId, @RequestBody ProductRequestDto productRequestDto) {
         try{
-            ProductResponseDto productResponseDto = productService.updateProduct(ProductId, productRequestDto);
+            ProductResponseDto productResponseDto = productService.updateProduct(productId, productRequestDto);
             return ResponseEntity.ok(productResponseDto);
         }catch (DataNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

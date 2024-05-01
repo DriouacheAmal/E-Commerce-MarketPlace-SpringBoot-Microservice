@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/rentalItems")
+@RequestMapping("/orders/api/rentalItems")
 public class RentalItemController {
     @Autowired
     private final RentalItemService rentalItemService;
@@ -28,7 +28,7 @@ public class RentalItemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("RentalItem with ID " + rentalItemId + " not found.");
         }
     }
-    @PostMapping("/create")
+    /*@PostMapping("/create")
     /*public ResponseEntity<RentalItemResponseDto> createRentalItem(@RequestBody RentalItemRequestDto rentalItemRequest){
         RentalItemResponseDto createRentalItem = rentalItemService.createRentalItem(rentalItemRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createRentalItem);
@@ -36,16 +36,19 @@ public class RentalItemController {
 
      */
 
-    public ResponseEntity<?> createRentalItem(@RequestBody RentalItemRequestDto rentalItemRequest) {
+    /*public ResponseEntity<?> createRentalItem(@RequestBody RentalItemRequestDto rentalItemRequest) {
         try {
             RentalItemResponseDto responseDto = rentalItemService.createRentalItem(rentalItemRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
         } catch (RentalItemNotAvailableException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("The car is not available for reservation during the specified period.");
+                    .body(e.getMessage());
         } catch (RentalItemAlreadyReservedException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("The car is already reserved by another customer during the specified period.");
+                    .body(e.getMessage());
+        }catch(IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
         }
     }
     @PutMapping("/{rentalItemId}")
@@ -57,6 +60,8 @@ public class RentalItemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("RentalItem with ID " + rentalItemId + " not found.");
         }
     }
+
+     */
     @DeleteMapping("/{rentalItemId}")
     public ResponseEntity<?> deleteRentalItemById(@PathVariable Long rentalItemId){
         try {

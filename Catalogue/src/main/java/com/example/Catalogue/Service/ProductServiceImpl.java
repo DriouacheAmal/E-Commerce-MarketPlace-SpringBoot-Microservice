@@ -2,6 +2,7 @@ package com.example.Catalogue.Service;
 
 import com.example.Catalogue.Dto.ProductRequestDto;
 import com.example.Catalogue.Dto.ProductResponseDto;
+import com.example.Catalogue.Dto.SubCategoryResponseDto;
 import com.example.Catalogue.Entity.Product;
 import com.example.Catalogue.Entity.SubCategory;
 import com.example.Catalogue.Excaption.CategoryNotFoundException;
@@ -35,6 +36,24 @@ public class ProductServiceImpl implements ProductService{
                 .orElseThrow(() -> new DataNotFoundException("Product not found"));
         return Mapper.mapToProductDto(product);
     }
+
+    @Override
+    public List<ProductResponseDto> getProductsBySubCategoryId(Long subCategoryId){
+        if (!subCategoryRepository.existsById(subCategoryId)) {
+            throw new DataNotFoundException("SubcategoryID " + subCategoryId +" not found: " );
+        }
+
+        // Fetch subcategories by category ID
+        List<Product> products = productRepository.findBySubCategory_SubCategoryId(subCategoryId);
+
+        // Convert the list of SubCategory entities to a list of SubCategoryResponseDto
+        List<ProductResponseDto> productsDtos = products.stream()
+                .map(Mapper::mapToProductDto)
+                .collect(Collectors.toList());
+
+        return productsDtos;
+    }
+
 
     @Override
     public List<ProductResponseDto> getAllProducts() {

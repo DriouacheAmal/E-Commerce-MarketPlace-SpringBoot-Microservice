@@ -17,7 +17,7 @@ public class RentalResponseDto {
     private Long rentalId;
     private Long customerId;
     private Date orderDate;
+    private List<RentalItemResponseDto> rentalItems;
     private BigDecimal totalPrice;
     private RentalStatus rentalStatus;
-    private List<RentalItemResponseDto> rentalItems;
 }

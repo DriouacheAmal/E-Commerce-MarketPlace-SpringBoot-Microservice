@@ -35,13 +35,28 @@ public class RentalItemServiceImpl implements RentalItemService{
         return overlappingRentals.isEmpty();
     }
 
-    @Override
+   /* @Override
     public RentalItemResponseDto createRentalItem(RentalItemRequestDto rentalItemRequest) {
         Long rentalItemId = rentalItemRequest.getRentalItemId();
         Long productId = rentalItemRequest.getProductId();
         LocalDateTime pickupDateTime = rentalItemRequest.getPickupDateTime();
         LocalDateTime returnDateTime = rentalItemRequest.getReturnDateTime();
 
+
+
+        // Calculate the duration between pickup and return times
+        long durationInHours = java.time.Duration.between(pickupDateTime, returnDateTime).toHours();
+
+        // Ensure the duration is at least 24 hours
+        if (durationInHours < 24) {
+            throw new IllegalArgumentException("Pickup and return times must be at least 24 hours apart.");
+        }
+
+        // Check that the reservation times are not in the past
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (pickupDateTime.isBefore(currentTime) || returnDateTime.isBefore(currentTime)) {
+            throw new IllegalArgumentException("Reservation times cannot be in the past.");
+        }
         if (pickupDateTime == null || returnDateTime == null || pickupDateTime.isAfter(returnDateTime)) {
             throw new IllegalArgumentException("Invalid pickupDateTime or returnDateTime");
         }
@@ -56,7 +71,7 @@ public class RentalItemServiceImpl implements RentalItemService{
         long hours = pickupDateTime.until(returnDateTime, java.time.temporal.ChronoUnit.HOURS);
         int totalDays = (int) Math.ceil(hours / 24.0);
 
-        BigDecimal pricePerDay = rentalItemRequest.getPricePerDay();
+        BigDecimal pricePerDay = rentalItemRequest.getPrice();
         if (pricePerDay.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Invalid pricePerDay value");
         }
@@ -89,17 +104,19 @@ public class RentalItemServiceImpl implements RentalItemService{
         long hours = newPickupDateTime.until(newReturnDateTime, java.time.temporal.ChronoUnit.HOURS);
         int totalDays = (int) Math.ceil(hours / 24.0);
 
-        BigDecimal pricePerDay = rentalItemRequest.getPricePerDay();
+        BigDecimal pricePerDay = rentalItemRequest.getPrice();
         BigDecimal subTotal = pricePerDay.multiply(BigDecimal.valueOf(totalDays));
 
         rentalItem.setTotalDays(totalDays);
         rentalItem.setSubTotal(subTotal);
 
         rentalItem.setProductId(rentalItemRequest.getProductId());
-        rentalItem.setPricePerDay(rentalItemRequest.getPricePerDay());
+        rentalItem.setPrice(rentalItemRequest.getPrice());
 
         return MappingProfile.mapToRentalItemDto(rentalItemRepository.save(rentalItem));
     }
+
+    */
     @Override
     public void deleteRentalItemById(Long rentalItemId) {
         var rentalItem = rentalItemRepository.findById(rentalItemId)

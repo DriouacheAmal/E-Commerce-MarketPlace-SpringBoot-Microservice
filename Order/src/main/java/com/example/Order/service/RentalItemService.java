@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 
 public interface RentalItemService {
     RentalItemResponseDto getRentalItemById(Long rentalItemId);
-    RentalItemResponseDto createRentalItem(RentalItemRequestDto rentalItemRequest);
-    RentalItemResponseDto updateRentalItem(Long rentalItemId, RentalItemRequestDto rentalItemRequest);
+   // RentalItemResponseDto createRentalItem(RentalItemRequestDto rentalItemRequest);
+    //RentalItemResponseDto updateRentalItem(Long rentalItemId, RentalItemRequestDto rentalItemRequest);
     boolean isCarAvailableForReservation(Long rentalItemId,Long productId, LocalDateTime pickupDateTime, LocalDateTime returnDateTime);
     void deleteRentalItemById(Long rentalItemId) ;
 

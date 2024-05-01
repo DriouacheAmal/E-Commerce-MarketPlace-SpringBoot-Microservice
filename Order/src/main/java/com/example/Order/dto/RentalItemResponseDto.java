@@ -14,10 +14,13 @@ public class RentalItemResponseDto {
     private Long rentalItemId;
     private Long productId;
     private Long rentalId;
+    private String productName;
+    private String imageUrl;
+    private BigDecimal price;
     private LocalDateTime pickupDateTime;
     private LocalDateTime returnDateTime;
     private int totalDays;
-    private BigDecimal pricePerDay;
+    //private BigDecimal pricePerDay;
     private BigDecimal subTotal;
 
 }

@@ -19,7 +19,6 @@ public class Category{
     @Column(unique = true)
     private String categoryName;
     private String imageUrl;
-    //@OneToMany
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SubCategory> subCategories;
     @OneToMany

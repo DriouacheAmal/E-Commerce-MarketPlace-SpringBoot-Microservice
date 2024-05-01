@@ -18,7 +18,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/catalogues/api/categories")
 
 public class CategoryController {
     @Autowired

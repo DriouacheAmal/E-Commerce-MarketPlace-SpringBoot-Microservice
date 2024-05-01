@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 public class RentalItemRequestDto {
     private Long rentalItemId;
     private Long productId;
-    private Long rentalId;
+    //private Long rentalId;
     private LocalDateTime pickupDateTime;
     private LocalDateTime returnDateTime;
-    private BigDecimal pricePerDay;
+    //private BigDecimal pricePerDay;
+    //private BigDecimal price;
 }

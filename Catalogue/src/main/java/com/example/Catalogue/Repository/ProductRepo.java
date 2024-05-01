@@ -21,4 +21,5 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     List<ProductResponseDto> findByKeyword(@Param("keyword") String keyword);
 
 
+    List<Product> findBySubCategory_SubCategoryId(Long subCategoryId);
 }

@@ -4,8 +4,7 @@ import com.example.Order.dto.RentalItemRequestDto;
 import com.example.Order.dto.RentalItemResponseDto;
 import com.example.Order.dto.RentalRequestDto;
 import com.example.Order.dto.RentalResponseDto;
-import com.example.Order.exception.RentalItemNotFoundException;
-import com.example.Order.exception.RentalNotFoundException;
+import com.example.Order.exception.*;
 import com.example.Order.service.RentalService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/rental")
+@RequestMapping("/orders/api/rental")
 public class RentalController {
     @Autowired
     private final RentalService rentalService;
@@ -40,9 +39,25 @@ public class RentalController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<RentalResponseDto> createRental(@RequestBody RentalRequestDto rentalRequest){
-        RentalResponseDto createRental = rentalService.createRental(rentalRequest);
+    /*public ResponseEntity<RentalResponseDto> createRental(@RequestBody RentalRequestDto rentalRequest){
+        RentalResponseDto createRental = rentalService.createRental (rentalRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createRental);
+    }
+
+     */
+
+    public ResponseEntity<?> createRental(@RequestBody RentalRequestDto rentalRequest){
+        try{
+            RentalResponseDto createRental = rentalService.createRental (rentalRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createRental);
+        }catch(InvalidRentalRequestException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (RentalItemNotAvailableException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch(RentalItemAlreadyReservedException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
     }
 
     @PutMapping("/{rentalId}")
@@ -61,13 +76,31 @@ public class RentalController {
             rentalService.cancelRentalById(rentalId);
             return ResponseEntity.ok("Rental with ID " + rentalId + " has been deleted.");
         } catch (RentalNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rental with ID " + rentalId + " not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/deleteRentalItemId/{rentalId}/{rentalItemId}")
+    public ResponseEntity<?> deleteRentalItemById(@PathVariable Long rentalId, @PathVariable Long rentalItemId){
+        try {
+            rentalService.deleteRentalItemById(rentalId, rentalItemId);
+            return ResponseEntity.ok("RentalItem with ID " + rentalItemId + " has been deleted.");
+        } catch (RentalNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+        } catch (RentalItemNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/history/{customerId}")
     public ResponseEntity<?> getRentalHistoryByCustomerId(@PathVariable Long customerId) {
-        List<RentalResponseDto> rentalHistory = rentalService.getRentalHistoryByCustomerId(customerId);
-        return new ResponseEntity<>(rentalHistory, HttpStatus.OK);
+        try{
+            List<RentalResponseDto> rentalHistory = rentalService.getRentalHistoryByCustomerId(customerId);
+            return new ResponseEntity<>(rentalHistory, HttpStatus.OK);
+        }catch (RentalNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
 
 
         /*try {

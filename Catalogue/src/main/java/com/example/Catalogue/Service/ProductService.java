@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ProductService {
     ProductResponseDto getProductById (Long productId);
+    public List<ProductResponseDto> getProductsBySubCategoryId(Long subCategoryId);
     List<ProductResponseDto> getAllProducts ();
     ProductResponseDto createProduct (ProductRequestDto productRequest);
     ProductResponseDto updateProduct (Long productId, ProductRequestDto productRequest);

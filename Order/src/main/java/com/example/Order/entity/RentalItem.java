@@ -18,13 +18,16 @@ public class RentalItem {
     private Long rentalItemId;
     @Column(name = "product_id")
     private Long productId;
+    private String productName;
+    //private String imageUrl;
+    private BigDecimal price;
     @Column(name = "pickup_date_time")
     private LocalDateTime pickupDateTime;
     @Column(name = "return_date_time")
     private LocalDateTime returnDateTime;
     private BigDecimal subTotal;
     private int totalDays;
-    private BigDecimal pricePerDay;
+    //private BigDecimal pricePerDay;
     @ManyToOne
     private Rental rental;
 }

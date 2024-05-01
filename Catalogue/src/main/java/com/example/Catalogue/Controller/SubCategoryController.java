@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/subcategories")
+@RequestMapping("/catalogues/api/subcategories")
 @AllArgsConstructor
 public class SubCategoryController {
     @Autowired
@@ -34,6 +34,18 @@ public class SubCategoryController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<?> getSubCategoriesByCategoryId(Long categoryId){
+        try{
+            List<SubCategoryResponseDto> subCategories = subCategoryService.getSubCategoriesByCategoryId(categoryId);
+            return ResponseEntity.ok(subCategories);
+        }catch(DataNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+    }
+
 
 
     @GetMapping("/")
